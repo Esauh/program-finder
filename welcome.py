@@ -48,7 +48,6 @@ with st.container():
         """
                 )
         st.subheader("To learn more about the effects of summer and after school programs click [here](https://afterschoolalliance.org/documents/What_Does_the_Research_Say_About_Afterschool.pdf)")
-        st_lottie()
     with right_column:
         st_lottie(lottie_graduation,
                   height = 500,
