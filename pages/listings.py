@@ -28,6 +28,6 @@ st.header("Program :red[Listings] Coming Soon!")
 with st.container():
     st.write("##")
     st.write("To return :green[Home] below")
-    return_home = st.button("Return to Home page")
+    return_home = st.button("Return :green[Home]")
     if return_home:
         switch_page("welcome")

@@ -6,7 +6,7 @@ from streamlit_lottie import st_lottie
 #Basic page setup for welcome page including lottie animations and hidden hamburger+nagivation menus must be first in every file
 st.set_page_config(
     page_title="Welcome Page",
-    page_icon=":tada",
+    page_icon=":mortar_board",
     initial_sidebar_state="collapsed",
     layout = "wide"
 )

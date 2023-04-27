@@ -29,16 +29,20 @@ def load_lottiefile(filepath: str):
 lottie_wand = load_lottiefile('lottiefiles/magic-wand.json')
 
 
-def disable():
+def disable_submit():
     st.session_state["disabled"] = True
+    st.session_state["listings"] = False
 
-def enable():
+def enable_submit():
     st.session_state["disabled"] = False
+    st.session_state["listings"] = True
 
 if "disabled" not in st.session_state:
     st.session_state["disabled"] = False
 
-"st.session_state:", st.session_state
+if "listings" not in st.session_state:
+    st.session_state["listings"] = True
+
 
 st.markdown("# Setup :blue[Wizard] :mage:")
 st.write("##")
@@ -55,7 +59,7 @@ with st.container():
             program_type = st.radio("# What category would you like your child to excel and develop in?"
                                     ,('STEM','Fine Arts','Foreign Language'))
             #TODO:disable functionality is not working
-            submitted = st.form_submit_button(":orange[Submit]", on_click=disable, disabled=st.session_state["disabled"])
+            submitted = st.form_submit_button(":orange[Submit]", on_click=disable_submit, disabled=st.session_state["disabled"])
             if submitted:
                 st.success("Wizard Setup Complete", icon="✅")   
                 st.balloons()   
@@ -66,14 +70,17 @@ with st.container():
             left_row, right_row = st.columns(2)
             with left_row:
                 st.markdown("Click the :violet[Listings] button below to see all the programs found!")
-                next_listings = st.button("Go To :violet[Listings]",use_container_width=True)
+                next_listings = st.button("Go To :violet[Listings]",use_container_width=True, disabled=st.session_state["listings"])
                 if next_listings:
                     switch_page("listings")
             with right_row:
-                st.markdown("Return to :green[Home] and nagivate back to the :blue[Wizard] to answer again!")
+                st.markdown("Return to :green[Home] if you want!")
                 return_home= st.button("Return :green[Home]",use_container_width=True) 
                 if return_home:
-                    switch_page("welcome")         
+                    switch_page("welcome")  
+st.markdown(program_day)
+st.markdown(program_time)
+st.markdown(program_type)
 st.divider()
 st.markdown("### If you wish to re-enter values for the setup wizard click this button which will allow you to :orange[Submit] again")
-st.button("Reset :blue[Wizard]", on_click=enable)
+st.button("Reset :blue[Wizard]", on_click=enable_submit)
