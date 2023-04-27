@@ -1,5 +1,5 @@
-### Program Finder Web App
+# Program Finder Web App
 
-# This is the repository contraining the source code for the ProgramFinder web app created utilizing StreamLit
+This is the repository contraining the source code for the ProgramFinder web app created utilizing StreamLit
 
-# Pull down this repo and have pipenv setup as your virtual enviornment 
+Pull down this repo and have pipenv setup as your virtual enviornment 
