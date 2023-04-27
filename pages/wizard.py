@@ -37,7 +37,7 @@ if "disabled" not in st.session_state:
 st.markdown("# Setup :blue[Wizard] :mage:")
 st.write("##")
 with st.container():
-    left_column, right_column = st.columns([1,1.5],gap="small")
+    left_column, right_column = st.columns([2,1.5],gap="small")
     with left_column:
         with st.form("Question_Form"):
             st.markdown("### Please select the answer to all of the questions below then hit the :green[Submit] button")
