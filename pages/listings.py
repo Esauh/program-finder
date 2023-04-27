@@ -22,10 +22,12 @@ no_sidebar_style = """
 st.markdown(no_sidebar_style, unsafe_allow_html=True)
 st.markdown(hide_menu_style, unsafe_allow_html=True)
 
-st.header("Program Listings Coming Soon!")
+"st.session_state:", st.session_state
+
+st.header("Program :red[Listings] Coming Soon!")
 with st.container():
     st.write("##")
-    st.write("To return to the welcome page click the button below")
+    st.write("To return :green[Home] below")
     return_home = st.button("Return to Home page")
     if return_home:
         switch_page("welcome")

@@ -36,7 +36,7 @@ lottie_search = load_lottiefile('lottiefiles/cloud-library.json')
 with st.container():
     left_column, right_column = st.columns([3,1.5], gap="small")
     with left_column:
-        st.markdown("# Hi, welcome to ProgramFinder! :wave:")
+        st.markdown("# Hi, welcome to :violet[ProgramFinder] :wave:")
         st.markdown("##")
         st.markdown("""## This web app is to help parents and those who work with children find suitable high quality extra curricular education programs for students""")
         st.markdown(
@@ -47,7 +47,7 @@ with st.container():
         - **:green[Increasing math, reading, science, and other academic scores]**
         """
                 )
-        st.markdown("To learn more about the effects of summer and after school programs click [here](https://afterschoolalliance.org/documents/What_Does_the_Research_Say_About_Afterschool.pdf)")
+        st.markdown("To learn more about the positive effects that summer and after school programs have on children click [here](https://afterschoolalliance.org/documents/What_Does_the_Research_Say_About_Afterschool.pdf)")
     with right_column:
         st_lottie(lottie_graduation,
                   height = 500,

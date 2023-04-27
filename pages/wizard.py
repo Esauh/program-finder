@@ -28,30 +28,34 @@ def load_lottiefile(filepath: str):
 
 lottie_wand = load_lottiefile('lottiefiles/magic-wand.json')
 
+
 def disable():
-    st.session_state.disabled = True
+    st.session_state["disabled"] = True
+
+def enable():
+    st.session_state["disabled"] = False
 
 if "disabled" not in st.session_state:
-    st.session_state.disabled=False
+    st.session_state["disabled"] = False
+
+"st.session_state:", st.session_state
 
 st.markdown("# Setup :blue[Wizard] :mage:")
 st.write("##")
 with st.container():
-    left_column, right_column = st.columns([2,1.5],gap="small")
+    left_column, right_column = st.columns([3,1.5],gap="small")
     with left_column:
-        with st.form("Question_Form"):
-            st.markdown("### Please select the answer to all of the questions below then hit the :green[Submit] button")
+        with st.form(key="Question_Form"):
+            st.markdown("### Please select the answer to all of the questions below then hit the :orange[Submit] button")
             st.divider()
-            if "visibility" not in st.session_state:
-                st.session_state.disabled = False
-            program_time = st.radio("Would you want your child to do this activity during the school year or duing the summer?",
+            program_time = st.radio("# Would you want your child to do this activity during the school year or duing the summer?",
                                     ("Summer","School Year"))
-            program_day = st.radio("Would your child be available during the weekdays or weekends to participate in the program?",
+            program_day = st.radio("# Would your child be available during the weekdays or weekends to participate in the program?",
                                 ("Weekdays","Weekends"))
-            program_type = st.radio("What category would you like your child to excel and develop in?"
+            program_type = st.radio("# What category would you like your child to excel and develop in?"
                                     ,('STEM','Fine Arts','Foreign Language'))
             #TODO:disable functionality is not working
-            submitted = st.form_submit_button("Submit", on_click=disable, disabled=st.session_state.disabled)
+            submitted = st.form_submit_button(":orange[Submit]", on_click=disable, disabled=st.session_state["disabled"])
             if submitted:
                 st.success("Wizard Setup Complete", icon="✅")   
                 st.balloons()   
@@ -59,14 +63,17 @@ with st.container():
         with right_column:
             st_lottie(lottie_wand, height=650, width=650)
         with st.container():
-            st.markdown("### After clicking :green[Submit] click the button below to see all the programs found if you entered the information in incorrectly return to home and nagivate back to the wizard :raised_hands:")
             left_row, right_row = st.columns(2)
             with left_row:
-                next_listings = st.button("Go To Listings Page")
+                st.markdown("Click the :violet[Listings] button below to see all the programs found!")
+                next_listings = st.button("Go To :violet[Listings]",use_container_width=True)
                 if next_listings:
                     switch_page("listings")
             with right_row:
-                return_home= st.button("Return Home") 
+                st.markdown("Return to :green[Home] and nagivate back to the :blue[Wizard] to answer again!")
+                return_home= st.button("Return :green[Home]",use_container_width=True) 
                 if return_home:
                     switch_page("welcome")         
-    
+st.divider()
+st.markdown("### If you wish to re-enter values for the setup wizard click this button which will allow you to :orange[Submit] again")
+st.button("Reset :blue[Wizard]", on_click=enable)
