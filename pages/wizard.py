@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_lottie import st_lottie
 import json
+
 st.set_page_config(
     page_title="Wizard Setup",
     page_icon=":mage:",
@@ -33,9 +34,13 @@ def disable_submit():
     st.session_state["disabled"] = True
     st.session_state["listings"] = False
 
+
 def enable_submit():
     st.session_state["disabled"] = False
     st.session_state["listings"] = True
+    st.session_state["program_time"] = ""
+    st.session_state["program_type"] = ""
+    st.session_state["program_date"] = ""
 
 if "disabled" not in st.session_state:
     st.session_state["disabled"] = False
@@ -53,17 +58,19 @@ with st.container():
             st.markdown("### Please select the answer to all of the questions below then hit the :orange[Submit] button")
             st.divider()
             program_time = st.radio("# Would you want your child to do this activity during the school year or duing the summer?",
-                                    ("Summer","School Year"))
+                                    ('Summer','School Year'))
             program_day = st.radio("# Would your child be available during the weekdays or weekends to participate in the program?",
-                                ("Weekdays","Weekends"))
+                                ('Weekdays','Weekends'))
             program_type = st.radio("# What category would you like your child to excel and develop in?"
                                     ,('STEM','Fine Arts','Foreign Language'))
-            #TODO:disable functionality is not working
             submitted = st.form_submit_button(":orange[Submit]", on_click=disable_submit, disabled=st.session_state["disabled"])
             if submitted:
                 st.success("Wizard Setup Complete", icon="✅")   
                 st.balloons()   
-            st.write("##")
+                st.session_state["program_time"] = program_time
+                st.session_state["program_type"] = program_type
+                st.session_state["program_date"] = program_day
+        st.write("##")
         with right_column:
             st_lottie(lottie_wand, height=650, width=650)
         with st.container():
@@ -78,9 +85,7 @@ with st.container():
                 return_home= st.button("Return :green[Home]",use_container_width=True) 
                 if return_home:
                     switch_page("welcome")  
-st.markdown(program_day)
-st.markdown(program_time)
-st.markdown(program_type)
+
 st.divider()
 st.markdown("### If you wish to re-enter values for the setup wizard click this button which will allow you to :orange[Submit] again")
 st.button("Reset :blue[Wizard]", on_click=enable_submit)
