@@ -32,7 +32,6 @@ def init_connection():
 conn = init_connection()
 
 # Perform query.
-# Uses st.cache_data to only rerun when the query changes or after 10 min.
 def run_query(query):
     with conn.cursor() as cur:
         cur.execute(query)
@@ -41,12 +40,6 @@ def run_query(query):
 def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)
-
-# query_pt = st.session_state["program_time"]
-# query_pd = st.session_state["program_date"]
-# query_ptype = st.session_state["program_type"] 
-
-
 
 if "program_type" not in st.session_state:
     st.session_state["program_type"] = "STEM"
@@ -80,18 +73,16 @@ query = f"select * from {program} where program_type ='{query_ptype}'  and progr
 
 rows = run_query(query)
 
-pt = st.session_state["program_type"]
-ptime = st.session_state["program_time"]
-pdate = st.session_state["program_date"]
+query_ptype = st.session_state["program_type"]
 
-if pt == "STEM":
+if query_ptype == "STEM":
     lottie = load_lottiefile("lottiefiles/coding.json")
-elif pt == "Fine Arts":
+elif query_ptype == "Fine Arts":
     lottie = load_lottiefile("lottiefiles/fine_arts.json")
 else:
     lottie = load_lottiefile("lottiefiles/foreign_language.json")
 
-st.markdown(f"### Here are some :violet[{pt}] based programs Click the name to view their website for more info!")
+st.markdown(f"### Here are some :violet[{query_ptype}] based programs click the name to view their website :raised_hands:")
 st.divider()
 
 with st.container():
@@ -103,11 +94,11 @@ with st.container():
             ## :violet[Program {rank}:] [{row[6]}]({row[4]})
             ### :orange[Costs: ${row[5]}]
             """)
+            st.divider()
             rank += 1
     with right_column:
         st_lottie(lottie, height=800, width=800)
 
-# Print results.
 
 #row[1] = School Year or Summer
 #row[2] = Weekdays or Weekends
@@ -119,8 +110,10 @@ with st.container():
 with st.container():
     st.write("##")
     st.write("##")
+    st.divider()
     right_column, left_column = st.columns(2)
     with left_column:
+
         return_wizard = st.button("Return to :blue[Wizard]", use_container_width=True)
         if return_wizard:
             switch_page("wizard")
