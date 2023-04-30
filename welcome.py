@@ -2,6 +2,7 @@ import json
 import streamlit as st 
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_lottie import st_lottie
+from markdownlit import mdlit
 
 #Basic page setup for welcome page including lottie animations and hidden hamburger+nagivation menus must be first in every file
 st.set_page_config(
@@ -45,13 +46,15 @@ with st.container():
         - **:green[Lowering school dropout]**
         - **:green[Raising enrollment into higher education]**
         - **:green[Increasing math, reading, science, and other academic scores]**
+        - **:green[Lowering the likelyhood of a child engaing in risky unsupervised behaviors]**
         """
                 )
-        st.markdown("To learn more about the positive effects that summer and after school programs have on children click [here](https://afterschoolalliance.org/documents/What_Does_the_Research_Say_About_Afterschool.pdf)")
+        mdlit('''### To learn more about the positive effects that summer and after school programs have on children click @(🎒)([green]here[/green])(https://afterschoolalliance.org/documents/What_Does_the_Research_Say_About_Afterschool.pdf)
+        ''')
     with right_column:
         st_lottie(lottie_graduation,
                   height = 500,
-                  width = 500)
+                  width = 550)
     st.divider()
 
 with st.container():
@@ -63,7 +66,7 @@ with st.container():
         if wizard_button:
             switch_page("wizard")
     with right_column:
-        st_lottie(lottie_search, height = 300, width = 300)
+        st_lottie(lottie_search, height = 300, width = 500)
 
 
 

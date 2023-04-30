@@ -88,4 +88,6 @@ with st.container():
 
 st.divider()
 st.markdown("### If you wish to re-enter values for the setup wizard click this button which will allow you to :orange[Submit] again")
-st.button("Reset :blue[Wizard]", on_click=enable_submit)
+reset = st.button("Reset :blue[Wizard]", on_click=enable_submit)
+if reset:
+    st.info('Wizard has been reset you may re-enter information', icon="🧞‍♂️")
