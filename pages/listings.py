@@ -1,12 +1,12 @@
-import threading
-import cv2
+# import threading
+# import cv2
 import streamlit as st 
 from streamlit_extras.switch_page_button import switch_page
 import psycopg2
 from streamlit_lottie import st_lottie
 import json
-from streamlit_webrtc import webrtc_streamer
-from deepface import DeepFace
+# from streamlit_webrtc import webrtc_streamer
+# from deepface import DeepFace
 
 st.set_page_config(
     page_title="Program Listings",
@@ -103,33 +103,33 @@ def disable_camera():
 
 
 st.markdown(f"## Here are some :violet[{query_ptype}] programs click the name to view their website :raised_hands:")
-st.markdown('''### Additionally we would like to capture emotional data while you view your listings to enable the camera press the :green[Start] button below.''')
+# st.markdown('''### Additionally we would like to capture emotional data while you view your listings to enable the camera press the :green[Start] button below.''')
     
-lock = threading.Lock()
-img_container = {"img": None}
+# lock = threading.Lock()
+# img_container = {"img": None}
 
 
 
-face_cascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+# face_cascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-def video_frame_callback(frame):
-    img = frame.to_ndarray(format="bgr24")
-    with lock:
-        img_container["img"] = img
-    return frame
+# def video_frame_callback(frame):
+#     img = frame.to_ndarray(format="bgr24")
+#     with lock:
+#         img_container["img"] = img
+#     return frame
 
-ctx = webrtc_streamer(key="example", video_frame_callback=video_frame_callback)
+# ctx = webrtc_streamer(key="example", video_frame_callback=video_frame_callback)
 
-while ctx.state.playing:
-    with lock:
-        img = img_container["img"]
-    if img is None:
-        continue
-    emotion_data = DeepFace.analyze(img_path=img,actions=['emotion'], enforce_detection="False")
-    if emotion_data != []:
-        st.session_state["emotion"] = emotion_data[0]["dominant_emotion"]
+# while ctx.state.playing:
+#     with lock:
+#         img = img_container["img"]
+#     if img is None:
+#         continue
+#     emotion_data = DeepFace.analyze(img_path=img,actions=['emotion'], enforce_detection="False")
+#     if emotion_data != []:
+#         st.session_state["emotion"] = emotion_data[0]["dominant_emotion"]
 
-st.markdown("### :point_up_2: You will not be able to navigate to another page until you press the :red[Stop] button and disable the camera")
+# st.markdown("### :point_up_2: You will not be able to navigate to another page until you press the :red[Stop] button and disable the camera")
 st.divider()
 
 with st.container():
