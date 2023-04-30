@@ -8,9 +8,9 @@ streamlit = "*"
 streamlit-extras = "*"
 streamlit-lottie = "*"
 psycopg2-binary = "*"
-opencv-python = "*"
 streamlit-webrtc = "*"
 deepface = "*"
+opencv-python-headless = "*"
 
 [dev-packages]
 
